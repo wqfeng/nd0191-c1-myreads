@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import * as BooksAPI from "./BooksAPI";
 import Book from "./Book";
+import PropTypes from "prop-types";
 
 export default function SearchPage({ booksOnShelf, moveBook }) {
   const [query, setQuery] = useState("");
@@ -41,21 +42,30 @@ export default function SearchPage({ booksOnShelf, moveBook }) {
             value={query}
             onChange={(event) => {
               setQuery(event.target.value);
-              searchBooks(query, booksOnShelf);
+              searchBooks(event.target.value, booksOnShelf);
             }}
           />
         </div>
       </div>
       <div className="search-books-results">
-        <ol className="books-grid">
-          {searchResults &&
-            searchResults.map((book) => (
-              <li key={book.id}>
-                <Book book={book} moveBook={moveBook} />
-              </li>
-            ))}
-        </ol>
+        {searchResults.length > 0 ? (
+          <ol className="books-grid">
+            {searchResults &&
+              searchResults.map((book) => (
+                <li key={book.id}>
+                  <Book book={book} moveBook={moveBook} />
+                </li>
+              ))}
+          </ol>
+        ) : (
+          <p>Type in valid keywords to search.</p>
+        )}
       </div>
     </div>
   );
 }
+
+SearchPage.propTypes = {
+  booksOnShelf: PropTypes.arrayOf(PropTypes.object).isRequired,
+  moveBook: PropTypes.func.isRequired,
+};

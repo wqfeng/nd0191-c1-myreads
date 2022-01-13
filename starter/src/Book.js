@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function Book({ book, moveBook }) {
   return (
     <div className="book">
@@ -19,7 +21,7 @@ export default function Book({ book, moveBook }) {
               moveBook(book, event.target.value);
             }}
           >
-            <option value="none" disabled>
+            <option value="move" disabled>
               Move to...
             </option>
             <option value="currentlyReading">Currently Reading</option>
@@ -36,3 +38,8 @@ export default function Book({ book, moveBook }) {
     </div>
   );
 }
+
+Book.propTypes = {
+  book: PropTypes.object.isRequired,
+  moveBook: PropTypes.func.isRequired,
+};

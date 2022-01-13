@@ -1,4 +1,5 @@
 import Book from "./Book";
+import PropTypes from "prop-types";
 
 export default function BookShelf({ title, books, moveBook }) {
   return (
@@ -16,3 +17,9 @@ export default function BookShelf({ title, books, moveBook }) {
     </div>
   );
 }
+
+BookShelf.propTypes = {
+  title: PropTypes.string.isRequired,
+  books: PropTypes.arrayOf(PropTypes.object).isRequired,
+  moveBook: PropTypes.func.isRequired,
+};

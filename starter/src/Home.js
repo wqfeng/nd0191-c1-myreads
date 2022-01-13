@@ -1,5 +1,6 @@
 import BookShelf from "./BookShelf";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 export default function Home({ books, moveBook }) {
   const currentlyReading = books.filter(
@@ -34,3 +35,8 @@ export default function Home({ books, moveBook }) {
     </div>
   );
 }
+
+Home.propTypes = {
+  books: PropTypes.arrayOf(PropTypes.object).isRequired,
+  moveBook: PropTypes.func.isRequired,
+};
